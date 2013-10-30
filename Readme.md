@@ -4,13 +4,13 @@ This plugin adds a /bb/gitNotifyCommit endpoint to Jenkins that receives the sta
 Bitbucket.org, and will in turn trigger the Git plugin's notifyCommit listener. It requires version 1.5.0 or higher of the
 Jenkins Git plugin.
 
-## Why? ##
+### Why? ###
 
 The Git plugin's notifyCommit feature works really well for us, and we wanted an easy way to get Bitbucket to trigger this same behavior. Github has a
 "Jenkins (Git plugin)" service hook that does this automatically, but Bitbucket does not. Bitbucket, at least for the time being, has stopped taking requests for new hooks. Bitbucket has
 a Jenkins hook, but we really like the behavior of the Git plugin's notifyCommit trigger.
 
-## Usage ##
+##$ Usage ###
 
 Simply provide this endpoint as standard POST hook url in your bitbucket.org repository's hooks section. If your jenkins instance lives at
 http://example.com/jenkins, you would put http://example.com/jenkins/bb/gitNotifyCommit in the POST hook url field.
