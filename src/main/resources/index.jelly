@@ -1,0 +1,3 @@
+<div>
+  This plugin receives a standard POST hook from bitbucket.org repositories and triggers the Git plugin's notifyCommit listener.
+</div>
