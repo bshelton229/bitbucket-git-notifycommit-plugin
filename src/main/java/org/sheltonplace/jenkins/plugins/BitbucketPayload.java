@@ -16,20 +16,20 @@ public class BitbucketPayload {
 
     /**
      * Instantiate the class with the raw String of JSON from bitbucket.org
-     * 
+     *
      * @param json The raw JSON string from Bitbucket.org
      */
     public BitbucketPayload(String json) {
         this.json = JSONObject.fromObject(json);
     }
-    
+
     /**
      * @return the parsed JSONObject in case somebody wants it
      */
     public JSONObject getJSON() {
         return this.json;
     }
-    
+
     /**
      * @return The url of the repo
      */
@@ -39,7 +39,7 @@ public class BitbucketPayload {
         String slug = repo.getString("slug");
         return "git@bitbucket.org:"+owner+"/"+slug+".git";
     }
-    
+
     /**
      * @return An array of unique branches represented in the payload
      */
@@ -49,7 +49,7 @@ public class BitbucketPayload {
         for (Object commit: commits) {
             String branch = JSONObject.fromObject(commit).getString("branch");
             if (!branchesList.contains(branch)) {
-                branchesList.add(branch);                
+                branchesList.add(branch);
             }
         }
         return branchesList.toArray(new String[branchesList.size()]);

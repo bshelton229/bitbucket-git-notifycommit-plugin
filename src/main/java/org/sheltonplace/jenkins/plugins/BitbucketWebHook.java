@@ -30,7 +30,7 @@ public class BitbucketWebHook implements UnprotectedRootAction {
     }
 
     /**
-     * 
+     *
      * @return OK or fail with 404
      */
     @RequirePOST
