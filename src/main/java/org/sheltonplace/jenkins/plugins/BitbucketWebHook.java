@@ -1,21 +1,19 @@
 package org.sheltonplace.jenkins.plugins;
 
 import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
+import hudson.Extension;
+import hudson.model.UnprotectedRootAction;
+import hudson.plugins.git.GitStatus;
 
 import java.net.URISyntaxException;
 
 import jenkins.model.Jenkins;
-import hudson.Extension;
-import hudson.model.UnprotectedRootAction;
-import hudson.plugins.git.GitStatus;
-import hudson.plugins.git.GitStatus.Listener;
 
 import org.eclipse.jgit.transport.URIish;
 import org.kohsuke.stapler.HttpResponse;
 import org.kohsuke.stapler.HttpResponses;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.interceptor.RequirePOST;
-import org.kohsuke.stapler.interceptor.RespondSuccess;
 
 @Extension
 public class BitbucketWebHook implements UnprotectedRootAction {
