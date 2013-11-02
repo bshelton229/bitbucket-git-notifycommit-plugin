@@ -22,11 +22,11 @@ public class BitbucketWebHook implements UnprotectedRootAction {
     }
 
     public String getDisplayName() {
-        return "BB";
+        return "bitbucket";
     }
 
     public String getUrlName() {
-        return "bb";
+        return "bitbucket";
     }
 
     /**
