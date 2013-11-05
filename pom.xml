@@ -1,36 +1,40 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.jenkins-ci.plugins</groupId>
-    <artifactId>plugin</artifactId>
-    <version>1.509.4</version><!-- which version of Jenkins is this plugin built against? -->
-  </parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-  <artifactId>bitbucket-git-notifycommit</artifactId>
-  <version>0.2-SNAPSHOT</version>
-  <packaging>hpi</packaging>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.sheltonplace.jenkins.plugins</groupId>
+    <artifactId>bitbucket-git-notifycommit</artifactId>
+    <packaging>hpi</packaging>
+    <version>0.2-SNAPSHOT</version>
+    <name>Bitbucket Git Notify Commit</name>
 
-  <!-- get every artifact through repo.jenkins-ci.org, which proxies all the artifacts that we need -->
-  <repositories>
-    <repository>
-      <id>repo.jenkins-ci.org</id>
-      <url>http://repo.jenkins-ci.org/public/</url>
-    </repository>
-  </repositories>
+    <parent>
+        <groupId>org.jenkins-ci.plugins</groupId>
+        <artifactId>plugin</artifactId>
+        <version>1.509.4</version>
+        <!-- which version of Jenkins is this plugin built against? -->
+    </parent>
 
-  <pluginRepositories>
-    <pluginRepository>
-      <id>repo.jenkins-ci.org</id>
-      <url>http://repo.jenkins-ci.org/public/</url>
-    </pluginRepository>
-  </pluginRepositories>
+    <!-- get every artifact through repo.jenkins-ci.org, which proxies all the artifacts that we need -->
+    <repositories>
+        <repository>
+            <id>repo.jenkins-ci.org</id>
+            <url>http://repo.jenkins-ci.org/public/</url>
+        </repository>
+    </repositories>
 
-  <dependencies>
-  	<dependency>
-  		<groupId>org.jenkins-ci.plugins</groupId>
-  		<artifactId>git</artifactId>
-  		<version>1.5.0</version>
-  	</dependency>
-  </dependencies>
-  <groupId>org.sheltonplace.jenkins.plugins</groupId>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>repo.jenkins-ci.org</id>
+            <url>http://repo.jenkins-ci.org/public/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>git</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+    </dependencies>
 </project>
