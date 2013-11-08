@@ -1,6 +1,7 @@
 package org.sheltonplace.jenkins.plugins;
 
 import hudson.Extension;
+import hudson.ExtensionPoint;
 import hudson.model.UnprotectedRootAction;
 import hudson.plugins.git.GitStatus;
 import jenkins.model.Jenkins;
@@ -30,19 +31,46 @@ public class BitbucketWebHook implements UnprotectedRootAction {
 
     /**
      *
-     * @return OK or fail with 404
+     * @return 200 or fail
      */
     @RequirePOST
     @RespondSuccess
-    public void doGitNotifyCommit(@QueryParameter(required=true) String payload) throws URISyntaxException {
+    public void doGitNotifyCommit(@QueryParameter(required=true) String payload) throws Exception {
         BitbucketPayload bb = new BitbucketPayload(payload);
-        URIish uri = new URIish(bb.getUrl());
-
         LOGGER.info("Bitbucket payload received from: " + bb.getUrl());
+        for (Listener listener : Jenkins.getInstance().getExtensionList(Listener.class)) {
+            listener.onBitbucketPayload(bb);
+        }
+    }
 
-        // Iterate through the git plugin listeners and notify them
-        for (GitStatus.Listener listener : Jenkins.getInstance().getExtensionList(GitStatus.Listener.class)) {
-            listener.onNotifyCommit(uri, bb.getBranches());
+    public static abstract class Listener implements ExtensionPoint {
+        /**
+         * Called when a Bitbucket payload is received
+         *
+         * @param bitbucketPayload
+         * @throws URISyntaxException
+         */
+        public abstract void onBitbucketPayload(BitbucketPayload bitbucketPayload) throws URISyntaxException;
+    }
+
+    /**
+     * Handles triggering the Git plugin's onNotifyCommit when a Bitbucket
+     * payload is received.
+     */
+    @Extension
+    public static class BitbucketPayloadListener extends Listener {
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void onBitbucketPayload(BitbucketPayload bitbucketPayload) throws URISyntaxException {
+            URIish uri = new URIish(bitbucketPayload.getUrl());
+
+            // Iterate through the git plugin listeners and notify them
+            for (GitStatus.Listener listener : Jenkins.getInstance().getExtensionList(GitStatus.Listener.class)) {
+                listener.onNotifyCommit(uri, bitbucketPayload.getBranches());
+            }
         }
     }
 }
