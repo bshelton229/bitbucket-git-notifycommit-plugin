@@ -6,6 +6,7 @@ import hudson.model.UnprotectedRootAction;
 import hudson.plugins.git.GitStatus;
 
 import java.net.URISyntaxException;
+import java.util.logging.Logger;
 
 import jenkins.model.Jenkins;
 
@@ -17,6 +18,8 @@ import org.kohsuke.stapler.interceptor.RequirePOST;
 
 @Extension
 public class BitbucketWebHook implements UnprotectedRootAction {
+    private static final Logger LOGGER = Logger.getLogger(GitStatus.class.getName());
+
     public String getIconFileName() {
         return null;
     }
@@ -42,6 +45,8 @@ public class BitbucketWebHook implements UnprotectedRootAction {
         } catch (URISyntaxException e) {
             return HttpResponses.error(SC_BAD_REQUEST, new Exception("Illegal URL: " + bb.getUrl(), e));
         }
+
+        LOGGER.info("Bitbucket payload received from: " + bb.getUrl());
 
         // Iterate through the git plugin listeners and notify them
         for (GitStatus.Listener listener : Jenkins.getInstance().getExtensionList(GitStatus.Listener.class)) {
