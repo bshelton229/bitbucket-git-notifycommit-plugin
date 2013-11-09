@@ -7,8 +7,8 @@ Jenkins Git plugin.
 ### Why? ###
 
 The Git plugin's notifyCommit feature works really well for us, and we wanted an easy way to get Bitbucket to trigger this same behavior. Github has a
-"Jenkins (Git plugin)" service hook that does this automatically, but Bitbucket does not. Bitbucket, at least for the time being, has stopped taking requests for new hooks. Bitbucket has
-a Jenkins hook, but we really like the behavior of the Git plugin's notifyCommit trigger.
+"Jenkins (Git plugin)" service hook for this, but Bitbucket does not. Bitbucket--at least for the time being--has stopped taking requests for new hooks. Bitbucket has
+a Jenkins hook, but we often want the behavior of the Git plugin's notifyCommit trigger.
 
 ### Usage ###
 
